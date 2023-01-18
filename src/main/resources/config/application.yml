@@ -1,0 +1,18 @@
+server:
+  port: ${PORT:1234}
+
+base-url: /api
+
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.xml
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
