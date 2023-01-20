@@ -20,6 +20,11 @@ class AppApplicationTests {
     private static final int OK = 200;
 
     @Test
+    void testInit() {
+        assertThat(true).isTrue();
+    }
+
+    @Test
     public void testRootWelcomePage() throws Exception {
 
         MockHttpServletResponse response = mockMvc

@@ -44,16 +44,16 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-actuator',
             'org.springframework.boot:spring-boot-starter-validation',
-            'org.springframework.boot:spring-boot-starter-thymeleaf',
-           // 'org.springframework.boot:spring-boot-starter-security',
+            //'org.springframework.boot:spring-boot-starter-thymeleaf',
+            'org.springframework.boot:spring-boot-starter-security',
             'com.querydsl:querydsl-core:5.0.0',
             'com.querydsl:querydsl-jpa:5.0.0',
             'org.liquibase:liquibase-core:4.8.0'
     )
 
     testImplementation(
-            //'org.springframework.boot:spring-boot-starter-security',
-            //'org.springframework.security:spring-security-test:5.5.1',
+            'org.springframework.boot:spring-boot-starter-security',
+            'org.springframework.security:spring-security-test:5.5.1',
             'org.springframework.boot:spring-boot-starter-test',
             'com.tobedevoured.modelcitizen:spring:0.8.3'
     )
