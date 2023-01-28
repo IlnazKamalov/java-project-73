@@ -1,9 +1,15 @@
 package hexlet.code.service;
 
+import hexlet.code.config.security.WebSecurityConfig;
 import hexlet.code.dto.UserDto;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
+import hexlet.code.service.interfaces.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +19,7 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 @AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -43,21 +49,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public final User getUser(long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("User not found"));
+    public final String getCurrentUserName() {
+
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
-    //@Override
-    //public List<User> getUsers() {
-    //    return userRepository.findAll();
-    //}
+    @Override
+    public final User getCurrentUser() {
+
+        return userRepository.findByEmail(getCurrentUserName()).get();
+    }
 
     @Override
-    public final void deleteUser(long id) {
-        final User deleteUser = userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("User not found"));
+    public final UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username)
+                .map(this::buildSpringUser)
+                .orElseThrow(() -> new UsernameNotFoundException("Not found user with 'username': " + username));
+    }
 
-        userRepository.delete(deleteUser);
+    private UserDetails buildSpringUser(final User user) {
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(), user.getPassword(), WebSecurityConfig.DEFAULT_AUTHORITIES
+        );
     }
 }

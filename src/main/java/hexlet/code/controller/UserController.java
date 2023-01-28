@@ -3,12 +3,13 @@ package hexlet.code.controller;
 import hexlet.code.dto.UserDto;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
-import hexlet.code.service.UserService;
+import hexlet.code.service.interfaces.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,33 +30,41 @@ public class UserController {
     public static final String USER_CONTROLLER_PATH = "/users";
     public static final String ID = "/{id}";
 
+    @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
     private final UserService userService;
 
     @PostMapping
     @ResponseStatus(CREATED)
     public final User registerNewUser(@RequestBody @Valid final UserDto userDto) {
+
         return userService.createNewUser(userDto);
     }
 
     @GetMapping
     public final List<User> getAll() {
+
         return new ArrayList<>(userRepository.findAll());
     }
 
     @GetMapping(ID)
     public final User getUserById(@PathVariable final long id) {
-        return userService.getUser(id);
+
+        return userRepository.findById(id).get();
     }
 
     @PutMapping(ID)
     public final User update(@PathVariable final long id,
                        @RequestBody @Valid final UserDto userDto) {
+
         return userService.updateUser(id, userDto);
     }
 
     @DeleteMapping(ID)
     public final void delete(@PathVariable final long id) {
-        userService.deleteUser(id);
+
+        userRepository.deleteById(id);
     }
 }

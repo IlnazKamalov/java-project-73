@@ -1,4 +1,4 @@
-package hexlet.code.service;
+package hexlet.code.service.interfaces;
 
 import hexlet.code.dto.UserDto;
 import hexlet.code.model.User;
@@ -8,7 +8,7 @@ public interface UserService {
     User createNewUser(UserDto userDto);
     User updateUser(long id, UserDto userDto);
 
-    User getUser(long id);
+    String getCurrentUserName();
 
-    void deleteUser(long id);
+    User getCurrentUser();
 }
