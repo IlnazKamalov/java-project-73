@@ -52,7 +52,8 @@ public class UserController {
     @GetMapping(ID)
     public final User getUserById(@PathVariable final long id) {
 
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).isPresent()
+                ? userRepository.findById(id).get() : null;
     }
 
     @PutMapping(ID)

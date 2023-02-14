@@ -45,7 +45,8 @@ public class TaskStatusController {
     @GetMapping(ID)
     public final TaskStatus getById(@PathVariable long id) {
 
-        return taskStatusRepository.findById(id).get();
+        return taskStatusRepository.findById(id).isPresent()
+                ? taskStatusRepository.findById(id).get() : null;
     }
 
     @PostMapping
