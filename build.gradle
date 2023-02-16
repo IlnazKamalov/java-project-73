@@ -16,7 +16,7 @@ plugins {
 
 group = 'hexlet.code'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -87,7 +87,7 @@ diffChangeLog {
 }
 
 compileJava {
-    options.release = 17
+    options.release = 11
     options.encoding = 'UTF-8'
 }
 
