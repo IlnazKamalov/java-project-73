@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public final void configure(final HttpSecurity httpSecurity) throws Exception {
 
         final var authenticationFilter = new JWTAuthenticationFilter(
-                authenticationManagerBean(), publicUrls, jwtHelper
+                authenticationManagerBean(), loginRequest, jwtHelper
         );
 
         final var authorizationFilter = new JWTAuthorizationFilter(
