@@ -48,16 +48,20 @@ public final class JWTAuthorizationFilter extends OncePerRequestFilter {
                 .map(claims -> claims.get(SPRING_SECURITY_FORM_USERNAME_KEY))
                 .map(Object::toString)
                 .map(this::buildAuthToken)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Authorization filter failed"));
 
-        SecurityContextHolder.getContext().setAuthentication(authToken);
+        SecurityContextHolder.getContext()
+                .setAuthentication(authToken);
+
         filterChain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken buildAuthToken(final String username) {
 
         return new UsernamePasswordAuthenticationToken(
-                username, null, DEFAULT_AUTHORITIES
+                username,
+                null,
+                DEFAULT_AUTHORITIES
         );
     }
 }

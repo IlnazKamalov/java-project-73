@@ -52,7 +52,8 @@ public final class JWTAuthenticationFilter extends UsernamePasswordAuthenticatio
     private LoginDto getLoginData(final HttpServletRequest request) throws AuthenticationException {
 
         try {
-            final String json = request.getReader().lines()
+            final String json = request.getReader()
+                    .lines()
                     .collect(Collectors.joining());
             return MAPPER.readValue(json, LoginDto.class);
         } catch (IOException error) {

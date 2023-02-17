@@ -57,19 +57,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public final User getCurrentUser() {
 
-        return userRepository.findByEmail(getCurrentUserName()).get();
+        return userRepository.findByEmail(getCurrentUserName()).isPresent()
+                ? userRepository.findByEmail(getCurrentUserName()).get() : null;
     }
 
     @Override
     public final UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+
         return userRepository.findByEmail(username)
                 .map(this::buildSpringUser)
                 .orElseThrow(() -> new UsernameNotFoundException("Not found user with 'username': " + username));
     }
 
     private UserDetails buildSpringUser(final User user) {
+
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword(), WebSecurityConfig.DEFAULT_AUTHORITIES
+                user.getEmail(),
+                user.getPassword(),
+                WebSecurityConfig.DEFAULT_AUTHORITIES
         );
     }
 }
