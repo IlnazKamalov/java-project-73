@@ -37,13 +37,13 @@ public class TaskStatusController {
     private final TaskStatusRepository taskStatusRepository;
 
     @GetMapping
-    public final List<TaskStatus> getAll() {
+    public List<TaskStatus> getAll() {
 
         return new ArrayList<>(taskStatusRepository.findAll());
     }
 
     @GetMapping(ID)
-    public final TaskStatus getById(@PathVariable long id) {
+    public TaskStatus getById(@PathVariable long id) {
 
         return taskStatusRepository.findById(id).isPresent()
                 ? taskStatusRepository.findById(id).get() : null;
@@ -51,20 +51,20 @@ public class TaskStatusController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public final TaskStatus createTaskStatus(@RequestBody TaskStatusDto taskStatusDto) {
+    public TaskStatus createTaskStatus(@RequestBody TaskStatusDto taskStatusDto) {
 
         return taskStatusService.createNewStatus(taskStatusDto);
     }
 
     @PutMapping(ID)
-    public final TaskStatus updateTaskStatus(@PathVariable long id,
+    public TaskStatus updateTaskStatus(@PathVariable long id,
                                        @RequestBody TaskStatusDto taskStatusDto) {
 
         return taskStatusService.updateStatus(id, taskStatusDto);
     }
 
     @DeleteMapping(ID)
-    public final void deleteTaskStatus(@PathVariable long id) {
+    public void deleteTaskStatus(@PathVariable long id) {
         taskStatusRepository.deleteById(id);
     }
 }

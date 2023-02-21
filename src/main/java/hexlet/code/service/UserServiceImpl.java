@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public final User createNewUser(final UserDto userDto) {
+    public User createNewUser(final UserDto userDto) {
 
         final User user = new User();
         user.setEmail(userDto.getEmail());
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public final User updateUser(long id, UserDto userDto) {
+    public User updateUser(long id, UserDto userDto) {
 
         final User userToUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -49,20 +49,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public final String getCurrentUserName() {
+    public String getCurrentUserName() {
 
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     @Override
-    public final User getCurrentUser() {
+    public User getCurrentUser() {
 
         return userRepository.findByEmail(getCurrentUserName()).isPresent()
                 ? userRepository.findByEmail(getCurrentUserName()).get() : null;
     }
 
     @Override
-    public final UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
         return userRepository.findByEmail(username)
                 .map(this::buildSpringUser)

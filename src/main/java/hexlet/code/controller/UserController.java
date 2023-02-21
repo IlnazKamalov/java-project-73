@@ -44,13 +44,13 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public final User registerNewUser(@RequestBody @Valid final UserDto userDto) {
+    public User registerNewUser(@RequestBody @Valid final UserDto userDto) {
 
         return userService.createNewUser(userDto);
     }
 
     @GetMapping
-    public final List<User> getAll() {
+    public List<User> getAll() {
 
         return userRepository.findAll()
                 .stream()
@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping(ID)
-    public final User getUserById(@PathVariable final long id) {
+    public User getUserById(@PathVariable final long id) {
 
         return userRepository.findById(id).isPresent()
                 ? userRepository.findById(id).get() : null;
@@ -66,7 +66,7 @@ public class UserController {
 
     @PutMapping(ID)
     @PreAuthorize(ONLY_OWNER_BY_ID)
-    public final User update(@PathVariable final long id,
+    public User update(@PathVariable final long id,
                        @RequestBody @Valid final UserDto userDto) {
 
         return userService.updateUser(id, userDto);
@@ -74,7 +74,7 @@ public class UserController {
 
     @DeleteMapping(ID)
     @PreAuthorize(ONLY_OWNER_BY_ID)
-    public final void delete(@PathVariable final long id) {
+    public void delete(@PathVariable final long id) {
 
         userRepository.deleteById(id);
     }
