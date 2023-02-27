@@ -92,8 +92,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .logout().disable();
-
-        httpSecurity
-                .headers().frameOptions().disable();
     }
 }

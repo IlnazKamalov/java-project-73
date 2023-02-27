@@ -33,7 +33,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/", "/**")
                 .setCachePeriod(0)
-                .addResourceLocations("classpath/static/index.html")
+                .addResourceLocations("classpath:/static/index.html")
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
 
