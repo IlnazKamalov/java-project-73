@@ -15,7 +15,7 @@
 
 <h3>Description:</h3>
 <h3>
-[Task manager](https://project5webapp.onrender.com) task management system. It allows you to set tasks, assign executors and change their statuses.
+[Task manager](https://project5webapp.onrender.com/) - task management system. It allows you to set tasks, assign executors and change their statuses.
 Registration and authentication are required to work with the system.
 
 Stack:
