@@ -43,7 +43,7 @@ public class TaskStatus {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-    mappedBy = "taskStatus")
+        mappedBy = "taskStatus")
     private List<Task> tasksList;
 
     public TaskStatus(long id) {
