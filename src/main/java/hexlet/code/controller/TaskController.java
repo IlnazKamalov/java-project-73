@@ -40,7 +40,7 @@ public class TaskController {
     private final TaskService taskService;
     private final TaskRepository taskRepository;
 
-    @Operation(summary = "Create new Task")
+    @Operation(summary = "Create new task")
     @ApiResponse(responseCode = "201", description = "Task created")
     @PostMapping
     @ResponseStatus(CREATED)
@@ -67,14 +67,23 @@ public class TaskController {
                 ? taskRepository.findById(id).get() : null;
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Task update"),
+        @ApiResponse(responseCode = "404", description = "Task not found")
+    })
     @PutMapping(ID)
     @Operation(summary = "Update task")
     @PreAuthorize(TASK_OWNER)
-    public Task updateTask(@PathVariable final long id, @RequestBody @Valid final TaskDto dto) {
+    public Task updateTask(@PathVariable final long id,
+                           @RequestBody @Valid final TaskDto dto) {
 
         return taskService.updateTask(id, dto);
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Task delete"),
+        @ApiResponse(responseCode = "404", description = "Task not found")
+    })
     @DeleteMapping(ID)
     @Operation(summary = "Delete task")
     @PreAuthorize(TASK_OWNER)
@@ -82,5 +91,4 @@ public class TaskController {
 
         taskRepository.deleteById(id);
     }
-
 }

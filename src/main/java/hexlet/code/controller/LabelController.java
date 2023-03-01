@@ -33,7 +33,7 @@ public class LabelController {
     private final LabelService labelService;
     private final LabelRepository labelRepository;
 
-    @Operation(summary = "Create new Label")
+    @Operation(summary = "Create new label")
     @ApiResponse(responseCode = "201", description = "Label created")
     @PostMapping
     @ResponseStatus(CREATED)
@@ -62,6 +62,10 @@ public class LabelController {
                 ? labelRepository.findById(id).get() : null;
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Label update"),
+        @ApiResponse(responseCode = "404", description = "Label not found")
+    })
     @PutMapping(ID)
     @Operation(summary = "Update label")
     public Label updateLabel(@PathVariable final long id,
@@ -70,9 +74,13 @@ public class LabelController {
         return labelService.updateLabel(id, dto);
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Label delete"),
+        @ApiResponse(responseCode = "404", description = "Label not found")
+    })
     @DeleteMapping(ID)
     @Operation(summary = "Delete label")
-    public void deleteLabel(@PathVariable final long id) throws Exception {
+    public void deleteLabel(@PathVariable final long id) {
 
         labelRepository.deleteById(id);
     }
