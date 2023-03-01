@@ -11,16 +11,17 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Configuration
-@Profile(SpringConfigForIT.TEST_PROFILE)
+@Profile(SpringConfigForTest.TEST_PROFILE)
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = "hexlet.code")
 @PropertySource(value = "classpath:/config/application.yml")
-public class SpringConfigForIT {
+public class SpringConfigForTest {
 
     public static final String TEST_PROFILE = "test";
 
     @Bean
     public static RestTemplate restTemplate() {
+
         return new RestTemplateBuilder().build();
     }
 }

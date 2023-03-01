@@ -69,13 +69,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public final void configure(final HttpSecurity httpSecurity) throws Exception {
 
-        final var authenticationFilter = new JWTAuthenticationFilter(
+        final JWTAuthenticationFilter authenticationFilter = new JWTAuthenticationFilter(
                 authenticationManagerBean(),
                 loginRequest,
                 jwtHelper
         );
 
-        final var authorizationFilter = new JWTAuthorizationFilter(
+        final JWTAuthorizationFilter authorizationFilter = new JWTAuthorizationFilter(
                 publicUrls,
                 jwtHelper
         );

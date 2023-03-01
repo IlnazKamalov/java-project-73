@@ -3,7 +3,12 @@ server:
 
 base-url: /api
 
+rollbar_token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0YXNrLW1hbmFnZXIiLCJpYXQiOjE2Nzc1OTU3NjcsInVzZXJuYW1lIjoia2FtYWxvdnBrQGdtYWlsLmNvbSIsImV4cCI6MTY3NzY4MjE2N30.EE230OE8F-bOH-HNB1kxYoSrupnvuJNAiq-DY4NnPz4
+
 spring:
+  application:
+    name: taskManager
+
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/changelog-master.xml

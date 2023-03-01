@@ -7,6 +7,12 @@ import hexlet.code.service.interfaces.UserService;
 
 import java.util.List;
 import javax.validation.Valid;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,6 +48,8 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+    @Operation(summary = "Create new user")
+    @ApiResponse(responseCode = "201", description = "User created")
     @PostMapping
     @ResponseStatus(CREATED)
     public User registerNewUser(@RequestBody @Valid final UserDto userDto) {
@@ -49,7 +57,10 @@ public class UserController {
         return userService.createNewUser(userDto);
     }
 
+    @ApiResponses(@ApiResponse(responseCode = "200", content =
+        @Content(schema = @Schema(implementation = User.class))))
     @GetMapping
+    @Operation(summary = "Get all users")
     public List<User> getAll() {
 
         return userRepository.findAll()
@@ -57,7 +68,9 @@ public class UserController {
                 .toList();
     }
 
+    @ApiResponses(@ApiResponse(responseCode = "200"))
     @GetMapping(ID)
+    @Operation(summary = "Get user")
     public User getUserById(@PathVariable final long id) {
 
         return userRepository.findById(id).isPresent()
@@ -65,6 +78,7 @@ public class UserController {
     }
 
     @PutMapping(ID)
+    @Operation(summary = "Update user")
     @PreAuthorize(ONLY_OWNER_BY_ID)
     public User update(@PathVariable final long id,
                        @RequestBody @Valid final UserDto userDto) {
@@ -73,6 +87,7 @@ public class UserController {
     }
 
     @DeleteMapping(ID)
+    @Operation(summary = "Delete user")
     @PreAuthorize(ONLY_OWNER_BY_ID)
     public void delete(@PathVariable final long id) {
 

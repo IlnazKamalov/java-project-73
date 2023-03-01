@@ -2,11 +2,15 @@ server:
   error:
     include-stacktrace: on_param
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
 spring:
   datasource:
     username: ""
     password: ""
-    url: "jdbc:h2:./devDatabase"
+    url: "jdbc:h2:./taskManager"
 
   jpa:
     show-sql: true

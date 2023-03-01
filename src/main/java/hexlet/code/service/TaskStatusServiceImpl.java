@@ -29,6 +29,7 @@ public class TaskStatusServiceImpl implements TaskStatusService {
 
         final TaskStatus taskStatusUpdate = taskStatusRepository.findById(id).isPresent()
                 ? taskStatusRepository.findById(id).get() : null;
+
         assert taskStatusUpdate != null;
         taskStatusUpdate.setName(taskStatusDto.getName());
 

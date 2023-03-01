@@ -41,14 +41,15 @@ public final class JWTAuthorizationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        final var authToken = Optional.ofNullable(request.getHeader(AUTHORIZATION))
+        final UsernamePasswordAuthenticationToken authToken = Optional
+                .ofNullable(request.getHeader(AUTHORIZATION))
                 .map(header -> header.replaceFirst("^" + BEARER, ""))
                 .map(String::trim)
                 .map(jwtHelper::verify)
                 .map(claims -> claims.get(SPRING_SECURITY_FORM_USERNAME_KEY))
                 .map(Object::toString)
                 .map(this::buildAuthToken)
-                .orElseThrow(() -> new RuntimeException("Authorization filter failed"));
+                .orElseThrow();
 
         SecurityContextHolder.getContext()
                 .setAuthentication(authToken);
