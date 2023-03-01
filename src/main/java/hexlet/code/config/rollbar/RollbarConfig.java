@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
-@ComponentScan({
-        "hexlet.code"
-})
+@ComponentScan({"hexlet.code"})
 public class RollbarConfig {
 
     @Value("${rollbar_token:}")
