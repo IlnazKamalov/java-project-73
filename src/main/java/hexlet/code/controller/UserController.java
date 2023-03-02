@@ -77,6 +77,10 @@ public class UserController {
                 ? userRepository.findById(id).get() : null;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User update"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @PutMapping(ID)
     @Operation(summary = "Update user")
     @PreAuthorize(ONLY_OWNER_BY_ID)
@@ -86,6 +90,10 @@ public class UserController {
         return userService.updateUser(id, userDto);
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User update"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @DeleteMapping(ID)
     @Operation(summary = "Delete user")
     @PreAuthorize(ONLY_OWNER_BY_ID)

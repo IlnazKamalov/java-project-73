@@ -20,7 +20,6 @@ public class TaskStatusServiceImpl implements TaskStatusService {
 
         final TaskStatus taskStatus = new TaskStatus();
         taskStatus.setName(taskStatusDto.getName());
-
         return taskStatusRepository.save(taskStatus);
     }
 

@@ -29,6 +29,7 @@ public class LabelServiceImpl implements LabelService {
         final Label labelToUpdate = labelRepository.findById(id).isPresent()
                 ? labelRepository.findById(id).get() : null;
 
+        assert labelToUpdate != null;
         labelToUpdate.setName(dto.getName());
         return labelRepository.save(labelToUpdate);
     }
