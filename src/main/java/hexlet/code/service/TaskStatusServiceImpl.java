@@ -31,7 +31,6 @@ public class TaskStatusServiceImpl implements TaskStatusService {
 
         assert taskStatusUpdate != null;
         taskStatusUpdate.setName(taskStatusDto.getName());
-
         return taskStatusRepository.save(taskStatusUpdate);
     }
 }

@@ -78,8 +78,8 @@ public class UserController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User update"),
-            @ApiResponse(responseCode = "404", description = "User not found")
+        @ApiResponse(responseCode = "200", description = "User update"),
+        @ApiResponse(responseCode = "404", description = "User not found")
     })
     @PutMapping(ID)
     @Operation(summary = "Update user")
@@ -91,8 +91,8 @@ public class UserController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User update"),
-            @ApiResponse(responseCode = "404", description = "User not found")
+        @ApiResponse(responseCode = "200", description = "User update"),
+        @ApiResponse(responseCode = "404", description = "User not found")
     })
     @DeleteMapping(ID)
     @Operation(summary = "Delete user")
