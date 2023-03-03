@@ -85,6 +85,7 @@ public class TaskStatusController {
     @Operation(summary = "Delete status")
     @DeleteMapping(ID)
     public void deleteTaskStatus(@PathVariable long id) {
+
         taskStatusRepository.deleteById(id);
     }
 }
