@@ -1,6 +1,6 @@
 const ru = {
   translation: {
-    hexletTodo: 'Менеджер задач',
+    IlnazTodo: 'Менеджер задач',
     users: 'Пользователи',
     statuses: 'Статусы',
     status: 'Статус',
@@ -11,8 +11,8 @@ const ru = {
     login: 'Вход',
     signup: 'Регистрация',
     welcome: {
-      title: 'Привет от Хекслета!',
-      body: 'Практические курсы по программированию',
+      title: 'Добро пожаловать!',
+      body: 'Это мой первый проект на Spring Boot. Вы можете перейти на мой GitHub по ссылке ниже.',
       buttonText: 'Узнать Больше',
     },
     email: 'Email',
