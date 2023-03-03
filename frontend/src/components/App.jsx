@@ -186,7 +186,7 @@ const App = () => {
       </div>
       <footer>
         <div className="container my-5 pt-4 border-top">
-          <a rel="noreferrer" href="https://github.com/IlnazKamalov/java-project-73">IlnazKamalov</a>
+          <a rel="noreferrer" href="https://github.com/IlnazKamalov">IlnazKamalov</a>
         </div>
       </footer>
     </>
