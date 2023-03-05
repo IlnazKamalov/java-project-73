@@ -52,6 +52,12 @@ public class LabelControllerTest {
         utils.tearDown();
     }
 
+    @BeforeEach
+    public void regDefaultUser() throws Exception {
+
+        utils.regDefaultUser();
+    }
+
     @Test
     public void registration() throws Exception {
 
@@ -66,7 +72,6 @@ public class LabelControllerTest {
     @Test
     public void getLabelById() throws Exception {
 
-        utils.regDefaultUser();
         utils.regDefaultLabel(TEST_USERNAME);
 
         final Label expectedLabel = labelRepository.findAll().get(0);
@@ -87,7 +92,6 @@ public class LabelControllerTest {
     @Test
     public void getLabelByIdFails() throws Exception {
 
-        utils.regDefaultUser();
         utils.regDefaultLabel(TEST_USERNAME);
 
         final Label expectedLabel = labelRepository.findAll().get(0);
@@ -104,7 +108,6 @@ public class LabelControllerTest {
     @Test
     public void getAllLabels() throws Exception {
 
-        utils.regDefaultUser();
         utils.regDefaultLabel(TEST_USERNAME);
 
         final var response = utils.perform(
@@ -122,8 +125,6 @@ public class LabelControllerTest {
     @Test
     public void twiceRegTheSameLabelFail() throws Exception {
 
-        utils.regDefaultUser();
-
         utils.regDefaultLabel(TEST_USERNAME).andExpect(status().isCreated());
         utils.regDefaultLabel(TEST_USERNAME).andExpect(status().isUnprocessableEntity());
 
@@ -133,7 +134,6 @@ public class LabelControllerTest {
     @Test
     public void updateLabel() throws Exception {
 
-        utils.regDefaultUser();
         utils.regDefaultLabel(TEST_USERNAME);
 
         final Long labelId = labelRepository.findAll().get(0).getId();
@@ -154,7 +154,6 @@ public class LabelControllerTest {
     @Test
     public void deleteLabel() throws Exception {
 
-        utils.regDefaultUser();
         utils.regDefaultLabel(TEST_USERNAME);
 
         final Long labelId = labelRepository.findAll().get(0).getId();
@@ -168,7 +167,6 @@ public class LabelControllerTest {
     @Test
     public void deleteLabelFails() throws Exception {
 
-        utils.regDefaultUser();
         utils.regDefaultLabel(TEST_USERNAME);
 
         final Long labelId = labelRepository.findAll().get(0).getId() + 1;
