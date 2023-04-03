@@ -58,8 +58,7 @@ public class LabelController {
     @Operation(summary = "Get label")
     public Label getLabelById(@PathVariable final Long id) {
 
-        return labelRepository.findById(id).isPresent()
-                ? labelRepository.findById(id).get() : null;
+        return labelRepository.findById(id).get();
     }
 
     @ApiResponses(value = {
