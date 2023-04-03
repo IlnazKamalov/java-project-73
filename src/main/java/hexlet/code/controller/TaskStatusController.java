@@ -53,8 +53,7 @@ public class TaskStatusController {
     @Operation(summary = "Get status")
     public TaskStatus getById(@PathVariable long id) {
 
-        return taskStatusRepository.findById(id).isPresent()
-                ? taskStatusRepository.findById(id).get() : null;
+        return taskStatusRepository.findById(id).get();
     }
 
     @Operation(summary = "Create new status")

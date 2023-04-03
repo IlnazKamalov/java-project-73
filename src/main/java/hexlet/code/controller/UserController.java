@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +41,8 @@ public class UserController {
             @userRepository.findById(#id).get().getEmail() == authentication.getName()
         """;
 
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
     private final UserService userService;
 
     @Operation(summary = "Create new user")
@@ -73,8 +70,7 @@ public class UserController {
     @Operation(summary = "Get user")
     public User getUserById(@PathVariable final long id) {
 
-        return userRepository.findById(id).isPresent()
-                ? userRepository.findById(id).get() : null;
+        return userRepository.findById(id).get();
     }
 
     @ApiResponses(value = {

@@ -57,8 +57,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User getCurrentUser() {
 
-        return userRepository.findByEmail(getCurrentUserName()).isPresent()
-                ? userRepository.findByEmail(getCurrentUserName()).get() : null;
+        return userRepository.findByEmail(getCurrentUserName()).get();
     }
 
     @Override

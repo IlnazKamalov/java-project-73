@@ -63,8 +63,7 @@ public class TaskController {
     @Operation(summary = "Get task")
     public Task getTaskById(@PathVariable final Long id) {
 
-        return taskRepository.findById(id).isPresent()
-                ? taskRepository.findById(id).get() : null;
+        return taskRepository.findById(id).get();
     }
 
     @ApiResponses(value = {

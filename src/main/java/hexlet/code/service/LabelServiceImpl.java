@@ -26,10 +26,7 @@ public class LabelServiceImpl implements LabelService {
     @Override
     public Label updateLabel(final long id, final LabelDto dto) {
 
-        final Label labelToUpdate = labelRepository.findById(id).isPresent()
-                ? labelRepository.findById(id).get() : null;
-
-        assert labelToUpdate != null;
+        final Label labelToUpdate = labelRepository.findById(id).get();
         labelToUpdate.setName(dto.getName());
         return labelRepository.save(labelToUpdate);
     }
