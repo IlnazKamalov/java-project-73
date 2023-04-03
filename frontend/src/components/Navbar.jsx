@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <BootstrapNavbar bg="light" variant="light" className="mb-3">
+    <BootstrapNavbar bg="dark" variant="dark" className="mb-3">
       <Container fluid>
         <Nav className="me-auto">
           <Link className="nav-link" to={routes.homePagePath()}>{t('IlnazTodo')}</Link>
